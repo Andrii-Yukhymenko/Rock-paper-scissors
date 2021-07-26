@@ -20,11 +20,12 @@ btnListWrapper.addEventListener("click", function (event) {
     btnList.forEach(function (item, i) {
       if (event.target == item) {
         var yourChoice = generateYourChoice(i);
-        var computerChoice = generateComputerChoice();
-        determinateWinner(yourChoice, computerChoice);
+        var yourChoiceNumber = i;
+        var computerChoice = generateComputerChoice()[1];
+        var computerChoiceNumber = generateComputerChoice()[0];
+        determinateWinner(yourChoiceNumber, computerChoice, yourChoice);
       }
-    }); // let computerChoice = generateComputerChoice();
-    // determinateWinner(yourChoice, computerChoice);
+    });
   }
 });
 
@@ -36,10 +37,11 @@ function generateYourChoice(i) {
 }
 
 function generateComputerChoice() {
-  var computerChoice = randomInteger(0.5, 2);
-  computerChoice = db[computerChoice].name;
+  var computerChoiceNumber = randomInteger(0.5, 2);
+  console.log(computerChoiceNumber);
+  var computerChoice = db[computerChoiceNumber].name;
   console.log("Computer choose ".concat(computerChoice));
-  return computerChoice;
+  return [computerChoiceNumber, computerChoice];
 }
 
 function randomInteger(min, max) {
@@ -47,9 +49,13 @@ function randomInteger(min, max) {
   return Math.round(rand);
 }
 
-function determinateWinner(a, b) {
-  if (db[a].breaks.hasOwnProperty(b) === true) {
-    console.log("You win!!!");
+function determinateWinner(a, b, c) {
+  if (db[a].breaks.includes(b)) {
+    console.log("win");
+  } else if (c === b) {
+    console.log("nobody");
+  } else {
+    console.log("lose");
   }
 }
 //# sourceMappingURL=main.js.map

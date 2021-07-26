@@ -23,12 +23,12 @@ btnListWrapper.addEventListener("click", (event) => {
     btnList.forEach((item, i) => {
       if (event.target == item) {
         let yourChoice = generateYourChoice(i);
-        let computerChoice = generateComputerChoice();
-        determinateWinner(yourChoice, computerChoice);
+        let yourChoiceNumber = i;
+        let computerChoice = generateComputerChoice()[1];
+        let computerChoiceNumber = generateComputerChoice()[0];
+        determinateWinner(yourChoiceNumber, computerChoice, yourChoice);
       }
     });
-    // let computerChoice = generateComputerChoice();
-    // determinateWinner(yourChoice, computerChoice);
   }
 });
 
@@ -39,17 +39,22 @@ function generateYourChoice(i) {
   return yourChoice;
 }
 function generateComputerChoice() {
-  let computerChoice = randomInteger(0.5, 2);
-  computerChoice = db[computerChoice].name;
+  let computerChoiceNumber = randomInteger(0.5, 2);
+  console.log(computerChoiceNumber);
+  let computerChoice = db[computerChoiceNumber].name;
   console.log(`Computer choose ${computerChoice}`);
-  return computerChoice;
+  return [computerChoiceNumber, computerChoice];
 }
 function randomInteger(min, max) {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
-function determinateWinner(a, b) {
-  if (db[a].breaks.hasOwnProperty(b) === true) {
-    console.log("You win!!!");
+function determinateWinner(a, b, c) {
+  if (db[a].breaks.includes(b)) {
+    console.log("win");
+  } else if (c === b) {
+    console.log("nobody");
+  } else {
+    console.log("lose");
   }
 }
