@@ -1,5 +1,7 @@
 let btnListWrapper = document.querySelector(".play-buttons__button-list"),
   btnList = btnListWrapper.querySelectorAll(".play-buttons__button"),
+  modalText = document.querySelector(".modal__text"),
+  modal = document.querySelector(".modal"),
   db = [
     {
       name: "rock",
@@ -32,6 +34,10 @@ btnListWrapper.addEventListener("click", (event) => {
   }
 });
 
+modal.addEventListener("click", () => {
+  modal.classList.remove('modal--visible');
+});
+
 function generateYourChoice(i) {
   console.clear();
   let yourChoice = db[i].name;
@@ -50,11 +56,31 @@ function randomInteger(min, max) {
   return Math.round(rand);
 }
 function determinateWinner(a, b, c) {
+  modal.classList.add("modal--visible");
+  modalText.className = '';
   if (db[a].breaks.includes(b)) {
     console.log("win");
+    modalText.innerText = "You win!!!";
+    modalText.classList.add(
+      "modal__text--win",
+      "modal__text",
+      "modal--visible"
+    );
   } else if (c === b) {
     console.log("nobody");
+    modalText.innerText = "Nobody";
+    modalText.classList.add(
+      "modal__text--nobody",
+      "modal__text",
+      "modal--visible"
+    );
   } else {
     console.log("lose");
+    modalText.innerText = "You lose ;(";
+    modalText.classList.add(
+      "modal__text--lose",
+      "modal__text",
+      "modal--visible"
+    );
   }
 }

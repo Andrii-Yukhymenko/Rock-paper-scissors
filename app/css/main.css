@@ -55,4 +55,35 @@ body {
   height: 75px;
   background: #fff; }
 
+.modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(93, 94, 97, 0.64); }
+  .modal--visible {
+    display: block; }
+  .modal__body {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  .modal__text {
+    font-size: 50px;
+    color: #000; }
+    .modal__text--win {
+      color: #17ec2d; }
+    .modal__text--lose {
+      color: #ff1f1f; }
+    .modal__text--nobody {
+      color: #7b7171; }
+
 /*# sourceMappingURL=main.css.map */

@@ -2,6 +2,8 @@
 
 var btnListWrapper = document.querySelector(".play-buttons__button-list"),
     btnList = btnListWrapper.querySelectorAll(".play-buttons__button"),
+    modalText = document.querySelector(".modal__text"),
+    modal = document.querySelector(".modal"),
     db = [{
   name: "rock",
   breaks: ["scissors"],
@@ -28,6 +30,9 @@ btnListWrapper.addEventListener("click", function (event) {
     });
   }
 });
+modal.addEventListener("click", function () {
+  modal.classList.remove('modal--visible');
+});
 
 function generateYourChoice(i) {
   console.clear();
@@ -50,12 +55,21 @@ function randomInteger(min, max) {
 }
 
 function determinateWinner(a, b, c) {
+  modal.classList.add("modal--visible");
+  modalText.className = '';
+
   if (db[a].breaks.includes(b)) {
     console.log("win");
+    modalText.innerText = "You win!!!";
+    modalText.classList.add("modal__text--win", "modal__text", "modal--visible");
   } else if (c === b) {
     console.log("nobody");
+    modalText.innerText = "Nobody";
+    modalText.classList.add("modal__text--nobody", "modal__text", "modal--visible");
   } else {
     console.log("lose");
+    modalText.innerText = "You lose ;(";
+    modalText.classList.add("modal__text--lose", "modal__text", "modal--visible");
   }
 }
 //# sourceMappingURL=main.js.map
