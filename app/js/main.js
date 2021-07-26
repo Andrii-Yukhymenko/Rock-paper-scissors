@@ -56,20 +56,20 @@ function randomInteger(min, max) {
 
 function determinateWinner(a, b, c) {
   modal.classList.add("modal--visible");
-  modalText.className = '';
+  modalText.className = 'modal__text';
 
   if (db[a].breaks.includes(b)) {
     console.log("win");
     modalText.innerText = "You win!!!";
-    modalText.classList.add("modal__text--win", "modal__text", "modal--visible");
+    modalText.classList.add("modal__text--win");
   } else if (c === b) {
     console.log("nobody");
     modalText.innerText = "Nobody";
-    modalText.classList.add("modal__text--nobody", "modal__text", "modal--visible");
+    modalText.classList.add("modal__text--nobody");
   } else {
     console.log("lose");
     modalText.innerText = "You lose ;(";
-    modalText.classList.add("modal__text--lose", "modal__text", "modal--visible");
+    modalText.classList.add("modal__text--lose");
   }
 }
 //# sourceMappingURL=main.js.map
