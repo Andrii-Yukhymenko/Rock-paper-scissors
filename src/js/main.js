@@ -21,11 +21,11 @@ let btnListWrapper = document.querySelector(".play-buttons__button-list"),
 btnListWrapper.addEventListener("click", (event) => {
   if (event.target.classList.contains("play-buttons__button")) {
     btnList.forEach((item, i) => {
-      if (event.target == item) {
+      if (event.target === item) {
         let yourChoice = generateYourChoice(i);
         let yourChoiceNumber = i;
-        let computerChoice = generateComputerChoice()[1];
-        let computerChoiceNumber = generateComputerChoice()[0];
+        let computerChoiceNumber = generateComputerChoice();
+        let computerChoice = db[computerChoiceNumber].name;
         determinateWinner(yourChoiceNumber, computerChoice, yourChoice);
       }
     });
@@ -40,10 +40,10 @@ function generateYourChoice(i) {
 }
 function generateComputerChoice() {
   let computerChoiceNumber = randomInteger(0.5, 2);
-  console.log(computerChoiceNumber);
+  // console.log(computerChoiceNumber);
   let computerChoice = db[computerChoiceNumber].name;
   console.log(`Computer choose ${computerChoice}`);
-  return [computerChoiceNumber, computerChoice];
+  return computerChoiceNumber;
 }
 function randomInteger(min, max) {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
