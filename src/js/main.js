@@ -1,49 +1,59 @@
 let btnListWrapper = document.querySelector(".play-buttons__button-list"),
-  btnList = btnListWrapper.querySelectorAll(".play-buttons__button"),
+  playBtns = btnListWrapper.querySelectorAll(".play-buttons__button"),
   modalText = document.querySelector(".modal__text"),
   modal = document.querySelector(".modal"),
+  yourChoiceCardRender = document.querySelector(".play-board__card--you"),
+  computerCardRender = document.querySelector(".play-board__card--computer"),
+  // test = `"${db[yourChoiceNumber].img}`,
   db = [
     {
       name: "rock",
       breaks: [`scissors`],
-      img: "",
+      img: "img/rock.png",
     },
     {
       name: "paper",
       breaks: [`rock`],
-      img: "",
+      img: "img/paper.png",
     },
     {
       name: "scissors",
       breaks: [`paper`],
-      img: "",
+      img: "img/scissors.png",
     },
   ];
 
 btnListWrapper.addEventListener("click", (event) => {
+  console.log(event.target);
   if (event.target.classList.contains("play-buttons__button")) {
-    btnList.forEach((item, i) => {
+    playBtns.forEach((item, i) => {
       if (event.target === item) {
         let yourChoice = generateYourChoice(i);
         let yourChoiceNumber = i;
         let computerChoiceNumber = generateComputerChoice();
         let computerChoice = db[computerChoiceNumber].name;
+        // console.log(`"${db[yourChoiceNumber].img}"`);
+        // renderChoiceCards();
         determinateWinner(yourChoiceNumber, computerChoice, yourChoice);
       }
     });
   }
 });
 
+// Событие закрытия модального окна
 modal.addEventListener("click", () => {
   modal.classList.remove('modal--visible');
 });
 
+// Генерация вашего варианта
 function generateYourChoice(i) {
   console.clear();
   let yourChoice = db[i].name;
   console.log(`You choose ${yourChoice}`);
   return yourChoice;
 }
+
+// Генерация варианта компьютера
 function generateComputerChoice() {
   let computerChoiceNumber = randomInteger(0.5, 2);
   // console.log(computerChoiceNumber);
@@ -51,10 +61,14 @@ function generateComputerChoice() {
   console.log(`Computer choose ${computerChoice}`);
   return computerChoiceNumber;
 }
+
+// Генерация рандомного числа
 function randomInteger(min, max) {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
+
+// Определение победителя
 function determinateWinner(a, b, c) {
   modal.classList.add("modal--visible");
   modalText.className = 'modal__text';
@@ -78,3 +92,8 @@ function determinateWinner(a, b, c) {
     );
   }
 }
+
+// function renderChoiceCards() {
+//   yourChoiceCardRender.innerHTML = '<img src=`"${db[yourChoiceNumber].img}"` alt="" class="play-buttons__img" />';
+//   computerCardRender.innerHTML = '<img src=`"${db[computerChoiceNumber].img}"` alt="" class="play-buttons__img" />';
+// }

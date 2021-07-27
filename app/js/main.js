@@ -1,45 +1,54 @@
 "use strict";
 
 var btnListWrapper = document.querySelector(".play-buttons__button-list"),
-    btnList = btnListWrapper.querySelectorAll(".play-buttons__button"),
+    playBtns = btnListWrapper.querySelectorAll(".play-buttons__button"),
     modalText = document.querySelector(".modal__text"),
     modal = document.querySelector(".modal"),
-    db = [{
+    yourChoiceCardRender = document.querySelector(".play-board__card--you"),
+    computerCardRender = document.querySelector(".play-board__card--computer"),
+    // test = `"${db[yourChoiceNumber].img}`,
+db = [{
   name: "rock",
   breaks: ["scissors"],
-  img: ""
+  img: "img/rock.png"
 }, {
   name: "paper",
   breaks: ["rock"],
-  img: ""
+  img: "img/paper.png"
 }, {
   name: "scissors",
   breaks: ["paper"],
-  img: ""
+  img: "img/scissors.png"
 }];
 btnListWrapper.addEventListener("click", function (event) {
+  console.log(event.target);
+
   if (event.target.classList.contains("play-buttons__button")) {
-    btnList.forEach(function (item, i) {
+    playBtns.forEach(function (item, i) {
       if (event.target === item) {
         var yourChoice = generateYourChoice(i);
         var yourChoiceNumber = i;
         var computerChoiceNumber = generateComputerChoice();
-        var computerChoice = db[computerChoiceNumber].name;
+        var computerChoice = db[computerChoiceNumber].name; // console.log(`"${db[yourChoiceNumber].img}"`);
+        // renderChoiceCards();
+
         determinateWinner(yourChoiceNumber, computerChoice, yourChoice);
       }
     });
   }
-});
+}); // Событие закрытия модального окна
+
 modal.addEventListener("click", function () {
   modal.classList.remove('modal--visible');
-});
+}); // Генерация вашего варианта
 
 function generateYourChoice(i) {
   console.clear();
   var yourChoice = db[i].name;
   console.log("You choose ".concat(yourChoice));
   return yourChoice;
-}
+} // Генерация варианта компьютера
+
 
 function generateComputerChoice() {
   var computerChoiceNumber = randomInteger(0.5, 2); // console.log(computerChoiceNumber);
@@ -47,12 +56,14 @@ function generateComputerChoice() {
   var computerChoice = db[computerChoiceNumber].name;
   console.log("Computer choose ".concat(computerChoice));
   return computerChoiceNumber;
-}
+} // Генерация рандомного числа
+
 
 function randomInteger(min, max) {
   var rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
-}
+} // Определение победителя
+
 
 function determinateWinner(a, b, c) {
   modal.classList.add("modal--visible");
@@ -71,5 +82,8 @@ function determinateWinner(a, b, c) {
     modalText.innerText = "You lose ;(";
     modalText.classList.add("modal__text--lose");
   }
-}
+} // function renderChoiceCards() {
+//   yourChoiceCardRender.innerHTML = '<img src=`"${db[yourChoiceNumber].img}"` alt="" class="play-buttons__img" />';
+//   computerCardRender.innerHTML = '<img src=`"${db[computerChoiceNumber].img}"` alt="" class="play-buttons__img" />';
+// }
 //# sourceMappingURL=main.js.map
