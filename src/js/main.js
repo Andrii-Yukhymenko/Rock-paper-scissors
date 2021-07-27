@@ -32,17 +32,17 @@ btnListWrapper.addEventListener("click", (event) => {
         let yourChoiceNumber = i;
         let computerChoiceNumber = generateComputerChoice();
         let computerChoice = db[computerChoiceNumber].name;
-        // console.log(`"${db[yourChoiceNumber].img}"`);
-        // renderChoiceCards();
+        renderChoiceCards(yourChoiceNumber, computerChoiceNumber);
+        // setTimeout();
         determinateWinner(yourChoiceNumber, computerChoice, yourChoice);
+        resetChoiceCards();
       }
     });
   }
 });
-
 // Событие закрытия модального окна
 modal.addEventListener("click", () => {
-  modal.classList.remove('modal--visible');
+  modal.classList.remove("modal--visible");
 });
 
 // Генерация вашего варианта
@@ -71,29 +71,34 @@ function randomInteger(min, max) {
 // Определение победителя
 function determinateWinner(a, b, c) {
   modal.classList.add("modal--visible");
-  modalText.className = 'modal__text';
+  modalText.className = "modal__text";
   if (db[a].breaks.includes(b)) {
     console.log("win");
     modalText.innerText = "You win!!!";
-    modalText.classList.add(
-      "modal__text--win"
-    );
+    modalText.classList.add("modal__text--win");
   } else if (c === b) {
     console.log("nobody");
     modalText.innerText = "Nobody";
-    modalText.classList.add(
-      "modal__text--nobody"
-    );
+    modalText.classList.add("modal__text--nobody");
   } else {
     console.log("lose");
     modalText.innerText = "You lose ;(";
-    modalText.classList.add(
-      "modal__text--lose"
-    );
+    modalText.classList.add("modal__text--lose");
   }
 }
 
-// function renderChoiceCards() {
-//   yourChoiceCardRender.innerHTML = '<img src=`"${db[yourChoiceNumber].img}"` alt="" class="play-buttons__img" />';
-//   computerCardRender.innerHTML = '<img src=`"${db[computerChoiceNumber].img}"` alt="" class="play-buttons__img" />';
-// }
+// Рендерим результаты на странице
+function renderChoiceCards(a, b) {
+  yourChoiceCardRender.innerHTML =
+    '<img src="' + db[a].img + '" alt="" class="play-buttons__img" />';
+  computerCardRender.innerHTML =
+    '<img src="' + db[b].img + '" alt="" class="play-buttons__img" />';
+}
+
+// Возвращаем стандартные картинки вместо выбранных
+function resetChoiceCards() {
+  yourChoiceCardRender.innerHTML =
+    '<img src="img/question.png" alt="" class="play-buttons__img" />';
+  computerCardRender.innerHTML =
+    '<img src="img/question.png" alt="" class="play-buttons__img" />';
+}
