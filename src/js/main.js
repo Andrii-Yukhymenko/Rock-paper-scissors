@@ -33,9 +33,7 @@ btnListWrapper.addEventListener("click", (event) => {
         let computerChoiceNumber = generateComputerChoice();
         let computerChoice = db[computerChoiceNumber].name;
         renderChoiceCards(yourChoiceNumber, computerChoiceNumber);
-        // setTimeout();
-        determinateWinner(yourChoiceNumber, computerChoice, yourChoice);
-        resetChoiceCards();
+        setTimeout(determinateWinner, 1500, yourChoiceNumber, computerChoice, yourChoice);
       }
     });
   }
@@ -43,6 +41,7 @@ btnListWrapper.addEventListener("click", (event) => {
 // Событие закрытия модального окна
 modal.addEventListener("click", () => {
   modal.classList.remove("modal--visible");
+  resetChoiceCards();
 });
 
 // Генерация вашего варианта

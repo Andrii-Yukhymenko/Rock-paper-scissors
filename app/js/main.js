@@ -30,10 +30,8 @@ btnListWrapper.addEventListener("click", function (event) {
         var yourChoiceNumber = i;
         var computerChoiceNumber = generateComputerChoice();
         var computerChoice = db[computerChoiceNumber].name;
-        renderChoiceCards(yourChoiceNumber, computerChoiceNumber); // setTimeout();
-
-        determinateWinner(yourChoiceNumber, computerChoice, yourChoice);
-        resetChoiceCards();
+        renderChoiceCards(yourChoiceNumber, computerChoiceNumber);
+        setTimeout(determinateWinner, 1500, yourChoiceNumber, computerChoice, yourChoice);
       }
     });
   }
@@ -41,6 +39,7 @@ btnListWrapper.addEventListener("click", function (event) {
 
 modal.addEventListener("click", function () {
   modal.classList.remove("modal--visible");
+  resetChoiceCards();
 }); // Генерация вашего варианта
 
 function generateYourChoice(i) {
