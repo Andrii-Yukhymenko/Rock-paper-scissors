@@ -18,21 +18,33 @@ var btnListWrapper = document.querySelector(".play-buttons__button-list"),
   name: "scissors",
   breaks: ["paper"],
   img: "img/scissors.png"
-}];
-btnListWrapper.addEventListener("click", function (event) {
-  console.log(event.target);
+}],
+    playersDb = {
+  you: {
+    hp: 100,
+    choice: "",
+    choiceNumber: ""
+  },
+  computer: {
+    hp: 100,
+    choice: "",
+    choiceNumber: ""
+  }
+}; // Событие выбора карточки
 
+btnListWrapper.addEventListener("click", function (event) {
+  // console.log(event.target);
   if (event.target.classList.contains("play-buttons__button")) {
     disableButtons();
     console.log("Buttons is disabled");
     playBtns.forEach(function (item, i) {
       if (event.target === item) {
-        var yourChoice = generateYourChoice(i);
-        var yourChoiceNumber = i;
-        var computerChoiceNumber = generateComputerChoice();
-        var computerChoice = db[computerChoiceNumber].name;
-        renderChoiceCards(yourChoiceNumber, computerChoiceNumber);
-        setTimeout(determinateWinner, 1000, yourChoiceNumber, computerChoice, yourChoice);
+        playersDb.you.choice = generateYourChoice(i);
+        playersDb.you.choiceNumber = i;
+        playersDb.computer.choiceNumber = generateComputerChoice();
+        playersDb.computer.choice = db[playersDb.computer.choiceNumber].name;
+        renderChoiceCards(playersDb.you.choiceNumber, playersDb.computer.choiceNumber);
+        setTimeout(determinateWinner, 1000, playersDb.you.choiceNumber, playersDb.computer.choice, playersDb.you.choice);
       }
     });
   }
