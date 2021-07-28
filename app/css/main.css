@@ -57,6 +57,8 @@ body {
   width: 75px;
   height: 75px;
   cursor: pointer; }
+  .play-buttons__button--disabled {
+    pointer-events: none; }
 
 .play-buttons__img {
   width: 100%;

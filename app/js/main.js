@@ -6,8 +6,7 @@ var btnListWrapper = document.querySelector(".play-buttons__button-list"),
     modal = document.querySelector(".modal"),
     yourChoiceCardRender = document.querySelector(".play-board__card--you"),
     computerCardRender = document.querySelector(".play-board__card--computer"),
-    // test = `"${db[yourChoiceNumber].img}`,
-db = [{
+    db = [{
   name: "rock",
   breaks: ["scissors"],
   img: "img/rock.png"
@@ -24,6 +23,8 @@ btnListWrapper.addEventListener("click", function (event) {
   console.log(event.target);
 
   if (event.target.classList.contains("play-buttons__button")) {
+    disableButtons();
+    console.log("Buttons is disabled");
     playBtns.forEach(function (item, i) {
       if (event.target === item) {
         var yourChoice = generateYourChoice(i);
@@ -31,7 +32,7 @@ btnListWrapper.addEventListener("click", function (event) {
         var computerChoiceNumber = generateComputerChoice();
         var computerChoice = db[computerChoiceNumber].name;
         renderChoiceCards(yourChoiceNumber, computerChoiceNumber);
-        setTimeout(determinateWinner, 1500, yourChoiceNumber, computerChoice, yourChoice);
+        setTimeout(determinateWinner, 1000, yourChoiceNumber, computerChoice, yourChoice);
       }
     });
   }
@@ -40,10 +41,10 @@ btnListWrapper.addEventListener("click", function (event) {
 modal.addEventListener("click", function () {
   modal.classList.remove("modal--visible");
   resetChoiceCards();
+  enableButtons();
 }); // Генерация вашего варианта
 
 function generateYourChoice(i) {
-  console.clear();
   var yourChoice = db[i].name;
   console.log("You choose ".concat(yourChoice));
   return yourChoice;
@@ -94,5 +95,19 @@ function renderChoiceCards(a, b) {
 function resetChoiceCards() {
   yourChoiceCardRender.innerHTML = '<img src="img/question.png" alt="" class="play-buttons__img" />';
   computerCardRender.innerHTML = '<img src="img/question.png" alt="" class="play-buttons__img" />';
+} // Отключение кнопок после, защита от спама
+
+
+function disableButtons() {
+  playBtns.forEach(function (item) {
+    item.classList.add("play-buttons__button--disabled");
+  });
+} // Включение кнопок после, защита от спама
+
+
+function enableButtons() {
+  playBtns.forEach(function (item) {
+    item.classList.remove("play-buttons__button--disabled");
+  });
 }
 //# sourceMappingURL=main.js.map
