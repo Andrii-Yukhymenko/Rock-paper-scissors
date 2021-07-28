@@ -6,6 +6,7 @@ let btnListWrapper = document.querySelector(".play-buttons__button-list"),
   computerCardRender = document.querySelector(".play-board__card--computer"),
   yourHp = document.querySelector(".users__user-hp--you"),
   computerHp = document.querySelector(".users__user-hp--computer"),
+  scoreLine = document.querySelector(".score-line__line"),
   db = [
     {
       name: "rock",
@@ -56,7 +57,7 @@ btnListWrapper.addEventListener("click", (event) => {
         );
         setTimeout(
           determinateWinner,
-          1000,
+          1500,
           playersDb.you.choiceNumber,
           playersDb.computer.choice,
           playersDb.you.choice
@@ -155,7 +156,9 @@ function enableButtons() {
   });
 }
 
+// Рендерим значения и полоску хп
 function renderHp() {
   yourHp.innerText = playersDb.you.hp;
   computerHp.innerText = playersDb.computer.hp;
+  scoreLine.style.width = playersDb.you.hp * 10 + `%`;
 }

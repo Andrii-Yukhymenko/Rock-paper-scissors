@@ -6,14 +6,16 @@
 body {
   background: #000;
   color: #fff;
+  font-family: "Minnie";
 }
 .container {
-  max-width: 1200px;
+  max-width: 750px;
   padding: 0 15px;
   margin: 0 auto;
 }
 .main-title {
   margin: 30px 0 30px 0;
+  @include adaptiv-value("font-size", 30, 23, 1);
   text-align: center;
 }
 .users {
@@ -39,21 +41,25 @@ body {
   height: 20px;
   background: red;
   margin: 0 0 30px 0;
+  border-radius: 5px;
+  overflow: hidden;
   &__line {
     height: 100%;
-    width: 50%;
     background: #fff;
+    transition: 1s cubic-bezier(0.7, 0.1, 0.32, 0.88);
   }
 }
 .play-board {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 0 0 30px 0;
+  margin: 0 0 55px 0;
   &__card {
-    width: 75px;
-    height: 75px;
+    @include adaptiv-value("width", 75, 90, 1);
+    @include adaptiv-value("height", 75, 90, 1);
     background: #fff;
+    border-radius: 10%;
+    overflow: hidden;
   }
   &__card-img {
     width: 100%;
@@ -66,13 +72,16 @@ body {
     margin: 0 0 15px 0;
   }
   &__button-list {
+    margin: 0 auto;
+    max-width: 500px;
     display: flex;
     justify-content: space-around;
   }
   &__button {
-    width: 75px;
-    height: 75px;
+    @include adaptiv-value("width", 75, 90, 1);
+    @include adaptiv-value("height", 75, 90, 1);
     cursor: pointer;
+    border-radius: 10%;
     &--disabled {
       pointer-events: none;
     }
@@ -104,10 +113,45 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 15px;
+  }
+  &__close-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #fc1717;
+    position: absolute;
+    top: -15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    &:before {
+      content: "";
+      height: 14%;
+      width: 60%;
+      display: block;
+      background-color: #fff;
+      position: absolute;
+      transform: translate(-50%, -50%) rotate(45deg);
+      top: 50%;
+      left: 50%;
+    }
+    &:after {
+      content: "";
+      height: 14%;
+      width: 60%;
+      display: block;
+      background-color: #fff;
+      position: absolute;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      top: 50%;
+      left: 50%;
+    }
   }
   &__text {
     font-size: 50px;
     color: #000;
+    text-align: center;
     &--win {
       color: #17ec2d;
     }

@@ -8,6 +8,7 @@ var btnListWrapper = document.querySelector(".play-buttons__button-list"),
     computerCardRender = document.querySelector(".play-board__card--computer"),
     yourHp = document.querySelector(".users__user-hp--you"),
     computerHp = document.querySelector(".users__user-hp--computer"),
+    scoreLine = document.querySelector(".score-line__line"),
     db = [{
   name: "rock",
   breaks: ["scissors"],
@@ -48,7 +49,7 @@ btnListWrapper.addEventListener("click", function (event) {
         playersDb.computer.choiceNumber = generateComputerChoice();
         playersDb.computer.choice = db[playersDb.computer.choiceNumber].name;
         renderChoiceCards(playersDb.you.choiceNumber, playersDb.computer.choiceNumber);
-        setTimeout(determinateWinner, 1000, playersDb.you.choiceNumber, playersDb.computer.choice, playersDb.you.choice);
+        setTimeout(determinateWinner, 1500, playersDb.you.choiceNumber, playersDb.computer.choice, playersDb.you.choice);
       }
     });
   }
@@ -137,10 +138,12 @@ function enableButtons() {
   playBtns.forEach(function (item) {
     item.classList.remove("play-buttons__button--disabled");
   });
-}
+} // Рендерим значения и полоску хп
+
 
 function renderHp() {
   yourHp.innerText = playersDb.you.hp;
   computerHp.innerText = playersDb.computer.hp;
+  scoreLine.style.width = playersDb.you.hp * 10 + "%";
 }
 //# sourceMappingURL=main.js.map
