@@ -4,6 +4,8 @@ let btnListWrapper = document.querySelector(".play-buttons__button-list"),
   modal = document.querySelector(".modal"),
   yourChoiceCardRender = document.querySelector(".play-board__card--you"),
   computerCardRender = document.querySelector(".play-board__card--computer"),
+  yourHp = document.querySelector(".users__user-hp--you"),
+  computerHp = document.querySelector(".users__user-hp--computer"),
   db = [
     {
       name: "rock",
@@ -23,17 +25,19 @@ let btnListWrapper = document.querySelector(".play-buttons__button-list"),
   ],
   playersDb = {
     you: {
-      hp: 100,
+      hp: 5,
       choice: "",
       choiceNumber: "",
     },
     computer: {
-      hp: 100,
+      hp: 5,
       choice: "",
       choiceNumber: "",
     },
   };
 
+// Изначальный рендер жизней
+renderHp();
 // Событие выбора карточки
 btnListWrapper.addEventListener("click", (event) => {
   // console.log(event.target);
@@ -99,15 +103,26 @@ function determinateWinner(a, b, c) {
     console.log("win");
     modalText.innerText = "You win!!!";
     modalText.classList.add("modal__text--win");
+    playersDb.you.hp++;
+    playersDb.computer.hp--;
+    console.log(`You have ${playersDb.you.hp} hp`);
+    console.log(`Computer have ${playersDb.computer.hp} hp`);
   } else if (c === b) {
     console.log("nobody");
     modalText.innerText = "Nobody";
     modalText.classList.add("modal__text--nobody");
+    console.log(`You have ${playersDb.you.hp} hp`);
+    console.log(`Computer have ${playersDb.computer.hp} hp`);
   } else {
     console.log("lose");
     modalText.innerText = "You lose ;(";
     modalText.classList.add("modal__text--lose");
+    playersDb.you.hp--;
+    playersDb.computer.hp++;
+    console.log(`You have ${playersDb.you.hp} hp`);
+    console.log(`Computer have ${playersDb.computer.hp} hp`);
   }
+  renderHp();
 }
 
 // Рендерим результаты на странице
@@ -138,4 +153,9 @@ function enableButtons() {
   playBtns.forEach((item) => {
     item.classList.remove("play-buttons__button--disabled");
   });
+}
+
+function renderHp() {
+  yourHp.innerText = playersDb.you.hp;
+  computerHp.innerText = playersDb.computer.hp;
 }
