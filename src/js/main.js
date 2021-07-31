@@ -7,7 +7,7 @@ let btnListWrapper = document.querySelector(".play-buttons__button-list"),
   yourHp = document.querySelector(".users__user-hp--you"),
   computerHp = document.querySelector(".users__user-hp--computer"),
   scoreLine = document.querySelector(".score-line__line"),
-  db = [
+  cardsDb = [
     {
       name: "rock",
       breaks: [`scissors`],
@@ -50,7 +50,7 @@ btnListWrapper.addEventListener("click", (event) => {
         playersDb.you.choice = generateYourChoice(i);
         playersDb.you.choiceNumber = i;
         playersDb.computer.choiceNumber = generateComputerChoice();
-        playersDb.computer.choice = db[playersDb.computer.choiceNumber].name;
+        playersDb.computer.choice = cardsDb[playersDb.computer.choiceNumber].name;
         renderChoiceCards(
           playersDb.you.choiceNumber,
           playersDb.computer.choiceNumber
@@ -76,7 +76,7 @@ modal.addEventListener("click", () => {
 
 // Генерация вашего варианта
 function generateYourChoice(i) {
-  let yourChoice = db[i].name;
+  let yourChoice = cardsDb[i].name;
   console.log(`You choose ${yourChoice}`);
   return yourChoice;
 }
@@ -85,7 +85,7 @@ function generateYourChoice(i) {
 function generateComputerChoice() {
   let computerChoiceNumber = randomInteger(0.5, 2);
   // console.log(computerChoiceNumber);
-  let computerChoice = db[computerChoiceNumber].name;
+  let computerChoice = cardsDb[computerChoiceNumber].name;
   console.log(`Computer choose ${computerChoice}`);
   return computerChoiceNumber;
 }
@@ -100,7 +100,7 @@ function randomInteger(min, max) {
 function determinateWinner(a, b, c) {
   modal.classList.add("modal--visible");
   modalText.className = "modal__text";
-  if (db[a].breaks.includes(b)) {
+  if (cardsDb[a].breaks.includes(b)) {
     modalText.classList.add("modal__text--win");
     playersDb.you.hp++;
     playersDb.computer.hp--;
@@ -145,9 +145,9 @@ function determinateWinner(a, b, c) {
 // Рендерим результаты на странице
 function renderChoiceCards(a, b) {
   yourChoiceCardRender.innerHTML =
-    '<img src="' + db[a].img + '" alt="" class="play-buttons__img" />';
+    '<img src="' + cardsDb[a].img + '" alt="" class="play-buttons__img" />';
   computerCardRender.innerHTML =
-    '<img src="' + db[b].img + '" alt="" class="play-buttons__img" />';
+    '<img src="' + cardsDb[b].img + '" alt="" class="play-buttons__img" />';
 }
 
 // Возвращаем стандартные картинки вместо выбранных

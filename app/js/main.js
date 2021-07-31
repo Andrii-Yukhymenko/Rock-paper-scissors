@@ -9,7 +9,7 @@ var btnListWrapper = document.querySelector(".play-buttons__button-list"),
     yourHp = document.querySelector(".users__user-hp--you"),
     computerHp = document.querySelector(".users__user-hp--computer"),
     scoreLine = document.querySelector(".score-line__line"),
-    db = [{
+    cardsDb = [{
   name: "rock",
   breaks: ["scissors"],
   img: "img/rock.png"
@@ -47,7 +47,7 @@ btnListWrapper.addEventListener("click", function (event) {
         playersDb.you.choice = generateYourChoice(i);
         playersDb.you.choiceNumber = i;
         playersDb.computer.choiceNumber = generateComputerChoice();
-        playersDb.computer.choice = db[playersDb.computer.choiceNumber].name;
+        playersDb.computer.choice = cardsDb[playersDb.computer.choiceNumber].name;
         renderChoiceCards(playersDb.you.choiceNumber, playersDb.computer.choiceNumber);
         setTimeout(determinateWinner, 1500, playersDb.you.choiceNumber, playersDb.computer.choice, playersDb.you.choice);
       }
@@ -62,7 +62,7 @@ modal.addEventListener("click", function () {
 }); // Генерация вашего варианта
 
 function generateYourChoice(i) {
-  var yourChoice = db[i].name;
+  var yourChoice = cardsDb[i].name;
   console.log("You choose ".concat(yourChoice));
   return yourChoice;
 } // Генерация варианта компьютера
@@ -71,7 +71,7 @@ function generateYourChoice(i) {
 function generateComputerChoice() {
   var computerChoiceNumber = randomInteger(0.5, 2); // console.log(computerChoiceNumber);
 
-  var computerChoice = db[computerChoiceNumber].name;
+  var computerChoice = cardsDb[computerChoiceNumber].name;
   console.log("Computer choose ".concat(computerChoice));
   return computerChoiceNumber;
 } // Генерация рандомного числа
@@ -87,7 +87,7 @@ function determinateWinner(a, b, c) {
   modal.classList.add("modal--visible");
   modalText.className = "modal__text";
 
-  if (db[a].breaks.includes(b)) {
+  if (cardsDb[a].breaks.includes(b)) {
     modalText.classList.add("modal__text--win");
     playersDb.you.hp++;
     playersDb.computer.hp--;
@@ -134,8 +134,8 @@ function determinateWinner(a, b, c) {
 
 
 function renderChoiceCards(a, b) {
-  yourChoiceCardRender.innerHTML = '<img src="' + db[a].img + '" alt="" class="play-buttons__img" />';
-  computerCardRender.innerHTML = '<img src="' + db[b].img + '" alt="" class="play-buttons__img" />';
+  yourChoiceCardRender.innerHTML = '<img src="' + cardsDb[a].img + '" alt="" class="play-buttons__img" />';
+  computerCardRender.innerHTML = '<img src="' + cardsDb[b].img + '" alt="" class="play-buttons__img" />';
 } // Возвращаем стандартные картинки вместо выбранных
 
 
