@@ -1,7 +1,6 @@
 "use strict";
 
 var btnListWrapper = document.querySelector(".play-buttons__button-list"),
-    playBtns = btnListWrapper.querySelectorAll(".play-buttons__button"),
     modalText = document.querySelector(".modal__text"),
     modal = document.querySelector(".modal"),
     yourChoiceCardRender = document.querySelector(".play-board__card--you"),
@@ -35,7 +34,9 @@ var btnListWrapper = document.querySelector(".play-buttons__button-list"),
   }
 }; // Изначальный рендер жизней
 
-renderHp(); // Событие выбора карточки
+renderHp();
+renderCards();
+var playBtns = btnListWrapper.querySelectorAll(".play-buttons__button"); // Событие выбора карточки
 
 btnListWrapper.addEventListener("click", function (event) {
   // console.log(event.target);
@@ -163,5 +164,11 @@ function renderHp() {
   yourHp.innerText = playersDb.you.hp;
   computerHp.innerText = playersDb.computer.hp;
   scoreLine.style.width = playersDb.you.hp * 100 / (playersDb.you.hp + playersDb.computer.hp) + "%";
+}
+
+function renderCards() {
+  cardsDb.forEach(function (item) {
+    btnListWrapper.innerHTML += '<div class="play-buttons__button" style="background: url(' + item.img + ')  0 0/contain no-repeat"></div>';
+  });
 }
 //# sourceMappingURL=main.js.map

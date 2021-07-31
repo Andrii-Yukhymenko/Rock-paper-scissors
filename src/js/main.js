@@ -1,5 +1,4 @@
 let btnListWrapper = document.querySelector(".play-buttons__button-list"),
-  playBtns = btnListWrapper.querySelectorAll(".play-buttons__button"),
   modalText = document.querySelector(".modal__text"),
   modal = document.querySelector(".modal"),
   yourChoiceCardRender = document.querySelector(".play-board__card--you"),
@@ -39,6 +38,10 @@ let btnListWrapper = document.querySelector(".play-buttons__button-list"),
 
 // Изначальный рендер жизней
 renderHp();
+
+renderCards();
+let playBtns = btnListWrapper.querySelectorAll(".play-buttons__button");
+
 // Событие выбора карточки
 btnListWrapper.addEventListener("click", (event) => {
   // console.log(event.target);
@@ -50,7 +53,8 @@ btnListWrapper.addEventListener("click", (event) => {
         playersDb.you.choice = generateYourChoice(i);
         playersDb.you.choiceNumber = i;
         playersDb.computer.choiceNumber = generateComputerChoice();
-        playersDb.computer.choice = cardsDb[playersDb.computer.choiceNumber].name;
+        playersDb.computer.choice =
+          cardsDb[playersDb.computer.choiceNumber].name;
         renderChoiceCards(
           playersDb.you.choiceNumber,
           playersDb.computer.choiceNumber
@@ -178,4 +182,13 @@ function renderHp() {
   computerHp.innerText = playersDb.computer.hp;
   scoreLine.style.width =
     (playersDb.you.hp * 100) / (playersDb.you.hp + playersDb.computer.hp) + `%`;
+}
+
+function renderCards() {
+  cardsDb.forEach((item) => {
+    btnListWrapper.innerHTML +=
+      '<div class="play-buttons__button" style="background: url(' +
+      item.img +
+      ')  0 0/contain no-repeat"></div>';
+  });
 }
