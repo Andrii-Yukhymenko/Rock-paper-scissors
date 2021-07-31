@@ -24,12 +24,12 @@ var btnListWrapper = document.querySelector(".play-buttons__button-list"),
 }],
     playersDb = {
   you: {
-    hp: 1,
+    hp: 2,
     choice: "",
     choiceNumber: ""
   },
   computer: {
-    hp: 1,
+    hp: 2,
     choice: "",
     choiceNumber: ""
   }
@@ -94,8 +94,10 @@ function determinateWinner(a, b, c) {
     if (playersDb.computer.hp === 0) {
       modalText.innerText = "!!! TOTAL WIN !!!";
       console.log("total win");
-      setTimeout(1500);
-      location.reload(); // location.reload();
+      setTimeout(function () {
+        location.reload();
+      }, 2500); // window.reload();
+      // location.reload();
     } else {
       console.log("win");
       modalText.innerText = "You win!!!";
@@ -116,7 +118,10 @@ function determinateWinner(a, b, c) {
     if (playersDb.you.hp === 0) {
       modalText.innerText = "!!! TOTAL LOSE !!!";
       console.log("total lose");
-      setTimeout(location.reload, 1500); // location.reload();
+      setTimeout(function () {
+        location.reload();
+      }, 2500); // setTimeout(window.reload(), 1500);
+      // location.reload();
     } else {
       modalText.innerText = "You lose ;(";
       console.log("lose");
@@ -158,6 +163,6 @@ function enableButtons() {
 function renderHp() {
   yourHp.innerText = playersDb.you.hp;
   computerHp.innerText = playersDb.computer.hp;
-  scoreLine.style.width = playersDb.you.hp * 10 + "%";
+  scoreLine.style.width = playersDb.you.hp * 100 / (playersDb.you.hp + playersDb.computer.hp) + "%";
 }
 //# sourceMappingURL=main.js.map
