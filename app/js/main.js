@@ -24,12 +24,12 @@ var btnListWrapper = document.querySelector(".play-buttons__button-list"),
 }],
     playersDb = {
   you: {
-    hp: 5,
+    hp: 1,
     choice: "",
     choiceNumber: ""
   },
   computer: {
-    hp: 5,
+    hp: 1,
     choice: "",
     choiceNumber: ""
   }
@@ -84,17 +84,22 @@ function randomInteger(min, max) {
 
 
 function determinateWinner(a, b, c) {
-  modal.classList.add("modal--visible");
-  modalText.className = "modal__text";
-
   if (db[a].breaks.includes(b)) {
-    console.log("win");
-    modalText.innerText = "You win!!!";
     modalText.classList.add("modal__text--win");
     playersDb.you.hp++;
     playersDb.computer.hp--;
     console.log("You have ".concat(playersDb.you.hp, " hp"));
     console.log("Computer have ".concat(playersDb.computer.hp, " hp"));
+
+    if (playersDb.computer.hp === 0) {
+      modalText.innerText = "!!! TOTAL WIN !!!";
+      console.log("total win");
+      setTimeout(1500);
+      location.reload(); // location.reload();
+    } else {
+      console.log("win");
+      modalText.innerText = "You win!!!";
+    }
   } else if (c === b) {
     console.log("nobody");
     modalText.innerText = "Nobody";
@@ -102,16 +107,25 @@ function determinateWinner(a, b, c) {
     console.log("You have ".concat(playersDb.you.hp, " hp"));
     console.log("Computer have ".concat(playersDb.computer.hp, " hp"));
   } else {
-    console.log("lose");
-    modalText.innerText = "You lose ;(";
     modalText.classList.add("modal__text--lose");
     playersDb.you.hp--;
     playersDb.computer.hp++;
     console.log("You have ".concat(playersDb.you.hp, " hp"));
     console.log("Computer have ".concat(playersDb.computer.hp, " hp"));
+
+    if (playersDb.you.hp === 0) {
+      modalText.innerText = "!!! TOTAL LOSE !!!";
+      console.log("total lose");
+      setTimeout(location.reload, 1500); // location.reload();
+    } else {
+      modalText.innerText = "You lose ;(";
+      console.log("lose");
+    }
   }
 
   renderHp();
+  modal.classList.add("modal--visible");
+  modalText.className = "modal__text";
 } // Рендерим результаты на странице
 
 
