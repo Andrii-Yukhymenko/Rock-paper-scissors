@@ -98,6 +98,8 @@ function randomInteger(min, max) {
 
 // Определение победителя
 function determinateWinner(a, b, c) {
+  modal.classList.add("modal--visible");
+  modalText.className = "modal__text";
   if (db[a].breaks.includes(b)) {
     modalText.classList.add("modal__text--win");
     playersDb.you.hp++;
@@ -110,8 +112,6 @@ function determinateWinner(a, b, c) {
       setTimeout(() => {
         location.reload();
       }, 2500);
-      // window.reload();
-      // location.reload();
     } else {
       console.log("win");
       modalText.innerText = "You win!!!";
@@ -134,16 +134,12 @@ function determinateWinner(a, b, c) {
       setTimeout(() => {
         location.reload();
       }, 2500);
-      // setTimeout(window.reload(), 1500);
-      // location.reload();
     } else {
       modalText.innerText = "You lose ;(";
       console.log("lose");
     }
   }
   renderHp();
-  modal.classList.add("modal--visible");
-  modalText.className = "modal__text";
 }
 
 // Рендерим результаты на странице
@@ -180,5 +176,6 @@ function enableButtons() {
 function renderHp() {
   yourHp.innerText = playersDb.you.hp;
   computerHp.innerText = playersDb.computer.hp;
-  scoreLine.style.width = ((playersDb.you.hp * 100) / (playersDb.you.hp + playersDb.computer.hp)) + `%`;
+  scoreLine.style.width =
+    (playersDb.you.hp * 100) / (playersDb.you.hp + playersDb.computer.hp) + `%`;
 }
