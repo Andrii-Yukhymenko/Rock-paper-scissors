@@ -3,9 +3,11 @@
 
 Дата начала работы: 26.07.2021
 
+[Ссылка на это приложение в моем портфолио](https://rps.andrii-yukhymenko.me/) 
+
 ### Использованные технологии:
 - Vanilla JS
-- - Github workflows/actions
+- Github workflows/actions
 
 #### Вспомагательные:
 - Prettier
